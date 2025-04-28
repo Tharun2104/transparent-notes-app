@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transparent Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="menu-bar">
+    <div class="window-controls">
+      <div class="dot red" id="closeBtn"></div>
+      <div class="dot yellow" id="minimizeBtn"></div>
+      <div class="dot green" id="maximizeBtn"></div>
+    </div>
+
+    <div class="menu">
+      <button id="fileMenuBtn">File ▾</button>
+      <div id="fileDropdown" class="dropdown">
+        <button id="saveBtn">Save</button>
+        <button id="loadBtn">Open</button>
+        <!-- <div class="transparency-control">
+            <label for="transparencyRange">Transparency</label>
+            <input type="range" id="transparencyRange" min="0.1" max="1" step="0.1" value="0.5">
+          </div> -->
+          <button id="transparencyLabel" disabled>Transparency</button> <!-- 🛠 Added -->
+        <input type="range" id="transparencyRange" min="0.1" max="1" step="0.1" value="0.5">
+        <button id="floatBtn">Float on Top</button>
+      </div>
+    </div>
+  </div>
+
+  <textarea id="noteArea" placeholder="Write your notes here..."></textarea>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

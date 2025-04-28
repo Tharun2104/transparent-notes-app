@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    background-color: rgba(4, 4, 4, 0.2); /* darker background */
+    backdrop-filter: blur(10px);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-app-region: drag;
+    overflow: hidden;
+  }
+  
+  /* Top menu bar */
+  .menu-bar {
+    width: 100%;
+    background-color: rgba(11, 11, 11, 0.7); /* match body but a little more visible */
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    height: 35px;
+    -webkit-app-region: drag;
+  }
+  
+  /* MacOS dots */
+  .window-controls {
+    display: flex;
+    gap: 8px;
+    margin-right: 15px;
+    -webkit-app-region: no-drag;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: grey;
+    cursor: pointer;
+  }
+  
+  .red { background-color: #ff5f57; }
+  .yellow { background-color: #ffbd2e; }
+  .green { background-color: #28c940; }
+  
+  /* Menu */
+  .menu {
+    position: relative;
+    -webkit-app-region: no-drag;
+  }
+  
+  #fileMenuBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  /* Dropdown */
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: rgba(30, 30, 30, 0.95); /* slightly lighter dropdown */
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  .dropdown button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    width: 150px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  
+  .dropdown button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Textarea */
+  textarea {
+    margin: 10px auto;
+    width: 90%;
+    height: 80%;
+    background-color: rgba(50, 50, 50, 0.6); /* still transparent */
+    color: #d3d3d3;
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    -webkit-app-region: no-drag;
+    /* backdrop-filter: blur(3px); */
+    /* will-change: transform; force repaint */
+  }  
+  
+  /* Scrollbar */
+  textarea::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  textarea::-webkit-scrollbar-track {
+    background: rgba(30, 30, 30, 0.8); /* match textarea background */
+    border-radius: 10px;
+  }
+  
+  textarea::-webkit-scrollbar-thumb {
+    background-color: rgba(80, 80, 80, 0.8); /* soft dark thumb */
+    border-radius: 10px;
+  }
+  
+  textarea::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(120, 120, 120, 0.9); /* little lighter on hover */
+  }
+  
+  .transparency-control {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+    color: #d3d3d3; /* light grey text */
+    font-size: 12px; /* slightly smaller font */
+    font-weight: 400;
+  }
+  
+  #transparencyRange {
+    width: 120px;
+    margin-top: 5px;
+    -webkit-appearance: none; 
+    /* remove ugly default style */
+    background: rgba(50, 50, 50, 0.8); /* dark track */
+    height: 6px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    /* color: white; */
+  }
+  
+  /* Thumb style */
+  #transparencyRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #d3d3d3; /* light grey thumb */
+    border: 1px solid #555; /* soft border */
+    cursor: pointer;
+    margin-top: -4px; /* to center thumb */
+  }
+  
+  /* Firefox */
+  #transparencyRange::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #d3d3d3;
+    border: 1px solid #555;
+    cursor: pointer;
+  }
+  
