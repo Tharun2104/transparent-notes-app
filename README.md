@@ -18,7 +18,7 @@ Semi-transparent, dark/light theme switch, float-on-top feature, and clean UI â€
 
 ## Getting Started
 
-### 1. Clone the repository
+### Clone the repository
 ```bash
 git clone https://github.com/your-username/transparent-notes.git
 cd transparent-notes
