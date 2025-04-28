@@ -66,6 +66,7 @@ body {
     flex-direction: column;
     border-radius: 5px;
     padding: 5px;
+    z-index: 9999;
   }
   
   .dropdown button {
@@ -98,8 +99,11 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     -webkit-app-region: no-drag;
-    /* backdrop-filter: blur(3px); */
-    /* will-change: transform; force repaint */
+    backdrop-filter: blur(8px); /* ADD THIS */
+    -webkit-backdrop-filter: blur(8px); /* ADD THIS */
+    transform: translateZ(0); /* ADD THIS */
+    will-change: transform; /* ADD THIS */
+    transition: background-color 0.3s ease, color 0.3s ease;
   }  
   
   /* Scrollbar */
