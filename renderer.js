@@ -1,4 +1,6 @@
 const { ipcRenderer } = require('electron');
+const marked = require('marked');
+
 
 // ------------------------
 // DOM Elements
@@ -22,6 +24,7 @@ const maximizeBtn = document.getElementById('maximizeBtn');
 let isFloating = false;
 let isDarkTheme = true; // Start with dark mode
 let transparencyValue = 0.5; // Default transparency (50%)
+let isMarkdownMode = false; // Track whether user is writing markdown or not
 
 // ------------------------
 // Save Notes to Local File
@@ -60,6 +63,54 @@ floatBtn.addEventListener('click', () => {
 
   floatBtn.textContent = isFloating ? 'Unfloat' : 'Float on Top';
 });
+
+// ------------------------
+// Markdown code
+// ------------------------
+const newMarkdownBtn = document.getElementById('newMarkdownBtn');
+
+newMarkdownBtn.addEventListener('click', () => {
+  textarea.value = '# New Markdown Note\n\nStart writing your **markdown** here...';
+  isMarkdownMode = true;
+  
+  const previewArea = document.getElementById('previewArea');
+  previewArea.style.display = 'block'; // Show when clicking New Markdown
+});
+
+
+textarea.addEventListener('input', () => {
+  const previewArea = document.getElementById('previewArea');
+
+  if (isMarkdownMode) {
+    previewArea.style.display = 'block';
+    previewArea.innerHTML = marked.parse(textarea.value); // ✅ Proper
+  } else {
+    previewArea.style.display = 'none';
+    previewArea.innerHTML = '';
+  }
+});
+
+// 
+// Back To Notes
+// 
+const backToNotesBtn = document.getElementById('backToNotesBtn');
+
+previewArea.innerHTML = '';
+
+backToNotesBtn.addEventListener('click', () => {
+  isMarkdownMode = false;
+  
+  const previewArea = document.getElementById('previewArea');
+  previewArea.style.display = 'none';
+  previewArea.innerHTML = '';
+
+  textarea.focus();
+});
+
+
+
+
+
 
 // ------------------------
 // Toggle File Dropdown Menu
@@ -109,36 +160,35 @@ themeToggleBtn.addEventListener('click', () => {
 // Update Backgrounds and Text Colors
 // ------------------------
 function updateBackground() {
-    // Define base colors for body and textarea based on theme
-    const bodyBaseColor = isDarkTheme ? '4, 4, 4' : '240, 240, 240';
-    const textareaBaseColor = isDarkTheme ? '50, 50, 50' : '255, 255, 255';
-    
-    // Define colors for menu bar and dropdown background
-    const menuBarColor = isDarkTheme ? 'rgba(11,11,11,0.7)' : 'rgba(230,230,230,0.8)';
-    const dropdownColor = isDarkTheme ? 'rgba(30,30,30,0.95)' : 'rgba(250,250,250,0.95)';
-  
-    // Set body transparency background
-    document.body.style.backgroundColor = `rgba(${bodyBaseColor}, ${transparencyValue})`;
-  
-    // Set textarea transparency background
-    textarea.style.backgroundColor = `rgba(${textareaBaseColor}, ${transparencyValue})`;
-    textarea.style.color = isDarkTheme ? '#d3d3d3' : '#333333';
-  
-    // Update menu-bar background color
-    const menuBar = document.querySelector('.menu-bar');
-    if (menuBar) {
-      menuBar.style.backgroundColor = menuBarColor;
-    }
-  
-    // Update dropdown background color
-    const dropdown = document.querySelector('.dropdown');
-    if (dropdown) {
-      dropdown.style.backgroundColor = dropdownColor;
-    }
-  
-    // Update all menu text/button colors
-    updateMenuColors();
+  const bodyBaseColor = isDarkTheme ? '4, 4, 4' : '240, 240, 240';
+  const textareaBaseColor = isDarkTheme ? '50, 50, 50' : '255, 255, 255';
+  const menuBarColor = isDarkTheme ? 'rgba(11,11,11,0.7)' : 'rgba(230,230,230,0.8)';
+  const dropdownColor = isDarkTheme ? 'rgba(30,30,30,0.95)' : 'rgba(250,250,250,0.95)';
+
+  document.body.style.backgroundColor = `rgba(${bodyBaseColor}, ${transparencyValue})`;
+
+  textarea.style.backgroundColor = `rgba(${textareaBaseColor}, ${transparencyValue})`;
+  textarea.style.color = isDarkTheme ? '#d3d3d3' : '#333333';
+
+  const previewArea = document.getElementById('previewArea');
+  if (previewArea) {
+    previewArea.style.backgroundColor = `rgba(${textareaBaseColor}, ${transparencyValue})`;
+    previewArea.style.color = isDarkTheme ? '#d3d3d3' : '#333333';
   }
+
+  const menuBar = document.querySelector('.menu-bar');
+  if (menuBar) {
+    menuBar.style.backgroundColor = menuBarColor;
+  }
+
+  const dropdown = document.querySelector('.dropdown');
+  if (dropdown) {
+    dropdown.style.backgroundColor = dropdownColor;
+  }
+
+  updateMenuColors();
+}
+
   
 
 // ------------------------

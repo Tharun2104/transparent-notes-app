@@ -57,17 +57,7 @@ body {
   }
   
   /* Dropdown */
-  .dropdown {
-    display: none;
-    position: absolute;
-    top: 30px;
-    left: 0;
-    background-color: rgba(30, 30, 30, 0.95); /* slightly lighter dropdown */
-    flex-direction: column;
-    border-radius: 5px;
-    padding: 5px;
-    z-index: 9999;
-  }
+
   
   .dropdown button {
     background: none;
@@ -84,27 +74,7 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
   }
   
-  /* Textarea */
-  textarea {
-    margin: 10px auto;
-    width: 90%;
-    height: 80%;
-    background-color: rgba(50, 50, 50, 0.6); /* still transparent */
-    color: #d3d3d3;
-    border: none;
-    padding: 20px;
-    font-size: 16px;
-    resize: none;
-    outline: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    -webkit-app-region: no-drag;
-    backdrop-filter: blur(8px); /* ADD THIS */
-    -webkit-backdrop-filter: blur(8px); /* ADD THIS */
-    transform: translateZ(0); /* ADD THIS */
-    will-change: transform; /* ADD THIS */
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }  
+ 
   
   /* Scrollbar */
   textarea::-webkit-scrollbar {
@@ -202,5 +172,79 @@ body {
   
   #themeIcon {
     transition: all 0.3s ease;
+  }
+  
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: rgba(30, 30, 30, 0.95);
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 9999; /* 🛠 Highest priority */
+  }
+  
+  .workspace {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 10px;
+    align-items: stretch;
+    overflow: hidden; /* No overflow from the workspace itself */
+}
+
+#noteArea, #previewArea {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    height: calc(100% - 20px); /* Correct Height inside workspace */
+    background-color: rgba(50, 50, 50, 0.6);
+    color: #d3d3d3;
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow-y: auto; /* very important */
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-app-region: no-drag;
+}
+
+#previewArea {
+  display: none;
+}
+  
+  #previewArea::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  #previewArea::-webkit-scrollbar-track {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+  }
+  
+  #previewArea::-webkit-scrollbar-thumb {
+    background-color: rgba(80, 80, 80, 0.8);
+    border-radius: 10px;
+  }
+  
+  #previewArea::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(120, 120, 120, 0.9);
+  }
+  
+  
+
+  textarea {
+    overflow-y: auto; /* already has */
+    overflow-x: hidden;
   }
   

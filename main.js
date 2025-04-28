@@ -18,32 +18,39 @@ function createWindow() {
   win.loadFile('index.html');
 
   // Save As
-  ipcMain.handle('save-as', async (event, content) => {
-    const { canceled, filePath } = await dialog.showSaveDialog(win, {
-      title: 'Save your notes',
-      defaultPath: 'notes.txt',
-      filters: [{ name: 'Text Files', extensions: ['txt'] }]
-    });
-    if (!canceled && filePath) {
-      fs.writeFileSync(filePath, content, 'utf8');
-      return true;
-    }
-    return false;
+ipcMain.handle('save-as', async (event, content) => {
+  const { canceled, filePath } = await dialog.showSaveDialog({
+    title: 'Save your notes',
+    defaultPath: 'notes.md',
+    filters: [
+      { name: 'Markdown Files', extensions: ['md'] },
+      { name: 'Text Files', extensions: ['txt'] }
+    ]
   });
+  if (!canceled && filePath) {
+    fs.writeFileSync(filePath, content, 'utf8');
+    return true;
+  }
+  return false;
+});
 
-  // Open file
-  ipcMain.handle('open-file', async () => {
-    const { canceled, filePaths } = await dialog.showOpenDialog(win, {
-      title: 'Open notes',
-      filters: [{ name: 'Text Files', extensions: ['txt'] }],
-      properties: ['openFile']
-    });
-    if (!canceled && filePaths.length > 0) {
-      const content = fs.readFileSync(filePaths[0], 'utf8');
-      return content;
-    }
-    return '';
+// Open File
+ipcMain.handle('open-file', async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog({
+    title: 'Open notes',
+    filters: [
+      { name: 'Markdown Files', extensions: ['md'] },
+      { name: 'Text Files', extensions: ['txt'] }
+    ],
+    properties: ['openFile']
   });
+  if (!canceled && filePaths.length > 0) {
+    const content = fs.readFileSync(filePaths[0], 'utf8');
+    return content;
+  }
+  return '';
+});
+
 
   // Window control handlers (NEW)
   ipcMain.on('window-close', () => {
