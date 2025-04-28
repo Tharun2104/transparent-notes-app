@@ -12,13 +12,14 @@ body {
   /* Top menu bar */
   .menu-bar {
     width: 100%;
-    background-color: rgba(11, 11, 11, 0.7); /* match body but a little more visible */
+    background-color: rgba(11, 11, 11, 0.7);
     padding: 5px 15px;
     display: flex;
     align-items: center;
+    justify-content: space-between; /* 🛠 center controls and push theme switch right */
     height: 35px;
     -webkit-app-region: drag;
-  }
+  }  
   
   /* MacOS dots */
   .window-controls {
@@ -163,5 +164,39 @@ body {
     background: #d3d3d3;
     border: 1px solid #555;
     cursor: pointer;
+  }
+  
+
+  /* Dark and Light Theme */
+  .theme-switch {
+    margin-left: auto;
+    padding-right: 40px; /* added */
+    -webkit-app-region: no-drag;
+  }
+  
+  
+  #themeToggleBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    -webkit-app-region: no-drag; /* 🛠 make it clickable */
+  }
+  
+  
+  #themeToggleBtn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+  }
+  
+
+  body, textarea {
+    transition: background-color 0.3s ease;
+  }
+  
+  #themeIcon {
+    transition: all 0.3s ease;
   }
   
